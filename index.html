@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>Bomb Game</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #111;
+      color: white;
+    }
+
+    button, input {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .hidden { display: none; }
+
+    /* לוח 3x6 מאונך */
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      grid-template-rows: repeat(6, 60px);
+      gap: 6px;
+      justify-content: center;
+      margin-top: 30px;
+      position: relative;
+    }
+
+    #board::before {
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: white;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    .circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #444;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    #hearts {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🎮 Bomb Game</h1>
+
+<div id="home">
+  <button id="createBtn">פתח משחק</button><br>
+  <input id="codeInput" placeholder="הכנס קוד משחק">
+  <button id="joinBtn">הצטרף למשחק</button>
+</div>
+
+<div id="status"></div>
+
+<div id="nameScreen" class="hidden">
+  <h2>כתוב את השם שלך</h2>
+  <input id="nameInput" placeholder="השם שלך">
+  <button id="saveNameBtn">אישור</button>
+  <div id="waitText"></div>
+</div>
+
+<div id="turnText"></div>
+<div id="board" class="hidden"></div>
+<div id="hearts" class="hidden"></div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
+  import { getDatabase } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDbVZzj32b-M4MYHxSfs778kdAoFIHH36Q",
+    authDomain: "players-bomb-game.firebaseapp.com",
+    projectId: "players-bomb-game",
+    storageBucket: "players-bomb-game.firebasestorage.app",
+    messagingSenderId: "333406815581",
+    appId: "1:333406815581:web:999afa655a8752c2de54b4",
+    measurementId: "G-XEX1YF9D2W"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  getAnalytics(app);
+
+  window.firebaseDB = getDatabase(app);
+</script>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
